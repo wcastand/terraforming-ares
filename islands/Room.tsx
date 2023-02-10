@@ -9,6 +9,7 @@ export default function Room(props: {
 }) {
 	const ws = useRef<WebSocket>();
 	const protocol = props.protocol === "https" ? "wss" : "ws";
+	console.log(protocol);
 	const playerName = useMemo(() => {
 		let name = getLocalStorage()?.getItem("playerName");
 		if (!name) {
