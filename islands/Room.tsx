@@ -3,12 +3,12 @@ import { getLocalStorage, reviver, send } from "../utils.ts";
 import { uniqueString } from "https://deno.land/x/uniquestring@v1.0.3/mod.ts";
 
 export default function Room(props: {
-	url: URL;
+	url: string;
 	room: string;
 }) {
 	const ws = useRef<WebSocket>();
-	console.log(new URL(props.url));
-	const protocol = props.url.protocol === "https" ? "wss" : "ws";
+	const url = new URL(props.url);
+	const protocol = ["https", "https:"].includes(url.protocol) ? "wss" : "ws";
 	const playerName = useMemo(() => {
 		let name = getLocalStorage()?.getItem("playerName");
 		if (!name) {
@@ -54,7 +54,7 @@ export default function Room(props: {
 
 	useEffect(() => {
 		try {
-			const socket = new WebSocket(`${protocol}://${props.url.origin}/api/ws`);
+			const socket = new WebSocket(`${protocol}://${url.host}/api/ws`);
 			socket.onopen = () => {
 				send(socket, {
 					type: "join",
