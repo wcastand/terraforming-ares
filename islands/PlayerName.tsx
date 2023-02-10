@@ -1,5 +1,6 @@
 import { uniqueString } from "https://deno.land/x/uniquestring@v1.0.3/mod.ts";
 import { useState } from "preact/hooks";
+import { getLocalStorage } from "../utils.ts";
 
 export default function PlayerName() {
 	return (
@@ -7,9 +8,9 @@ export default function PlayerName() {
 			<input
 				type="text"
 				name="name"
-				value={localStorage.getItem("playerName") || uniqueString(5)}
+				value={getLocalStorage()?.getItem("playerName") || uniqueString(5)}
 				onChange={(e) =>
-					localStorage.setItem("playerName", e.currentTarget.value)
+					getLocalStorage()?.setItem("playerName", e.currentTarget.value)
 				}
 			/>
 		</div>

@@ -1,4 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
+import { IS_BROWSER } from "$fresh/runtime.ts";
 
 // rome-ignore lint/suspicious/noExplicitAny: <explanation>
 export function replacer(_: string, value: any) {
@@ -24,4 +25,9 @@ export function reviver(_: string, value: any) {
 
 export function send(ws: WebSocket, msg: ServerMsg | ClientMsg) {
   ws.send(JSON.stringify(msg, replacer));
+}
+
+export function getLocalStorage() {
+  if (IS_BROWSER) return localStorage;
+  return undefined;
 }
