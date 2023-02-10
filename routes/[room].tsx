@@ -5,11 +5,7 @@ export default function RoomPage(props: PageProps) {
 	return (
 		<div>
 			<a href="/">Home</a>
-			<Room
-				origin={props.url.host}
-				protocol={props.url.protocol}
-				room={props.params.room}
-			/>
+			<Room url={props.url} room={props.params.room} />
 		</div>
 	);
 }
