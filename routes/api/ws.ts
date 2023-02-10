@@ -104,25 +104,3 @@ export const handler = (_req: Request, _ctx: HandlerContext): Response => {
 
   return response;
 };
-
-/*
-        wsRoomID = msg.room;
-        wsName = msg.name;
-        // create the room if it doesn't exist
-        if (!players_room) players[msg.room] = [ws];
-        // add player to the room
-        else players_room.push(ws);
-
-        if (!room) { // if room doesn't exist, create it
-          room = {
-            players: [{ name: msg.name, nt: 0 }],
-            oxygen: 0,
-            temperature: 0,
-            room: msg.room,
-          };
-          rooms[msg.room] = room;
-        } else { // if room exists, add player to it
-          room.players.push({ name: msg.name, nt: 0 });
-        }
-        // broadcast to all players in the room
-*/

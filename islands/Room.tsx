@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { getLocalStorage, reviver, send } from "../utils.ts";
 import { uniqueString } from "https://deno.land/x/uniquestring@v1.0.3/mod.ts";
 
-export default function Room(props: { room: string }) {
+export default function Room(props: { origin: string; room: string }) {
 	const ws = useRef<WebSocket>();
 	const playerName = useMemo(() => {
 		let name = getLocalStorage()?.getItem("playerName");
@@ -49,7 +49,7 @@ export default function Room(props: { room: string }) {
 
 	useEffect(() => {
 		try {
-			const socket = new WebSocket("ws://localhost:8000/api/ws");
+			const socket = new WebSocket(`ws://${props.origin}/api/ws`);
 			socket.onopen = () => {
 				send(socket, {
 					type: "join",
